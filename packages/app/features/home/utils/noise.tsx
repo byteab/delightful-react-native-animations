@@ -90,6 +90,7 @@ export function noise(x: number, y = 0, z = 0): number {
 }
 
 export function noiseDetail(lod: number, falloff: number): void {
+  'worklet'
   if (lod > 0) {
     perlin_octaves = lod
   }
@@ -99,6 +100,7 @@ export function noiseDetail(lod: number, falloff: number): void {
 }
 
 export function noiseSeed(seed: number): void {
+  'worklet'
   const lcg = (() => {
     const m = 4294967296
     const a = 1664525

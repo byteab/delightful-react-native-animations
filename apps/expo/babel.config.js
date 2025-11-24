@@ -14,7 +14,7 @@ module.exports = (api) => {
           },
           extensions: ['.js', '.jsx', '.tsx', '.ios.js', '.android.js'],
         },
-        'react-native-reanimated/plugin',
+        'react-native-worklets/plugin',
       ],
       // if you want reanimated support
       // 'react-native-reanimated/plugin',

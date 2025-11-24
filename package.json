@@ -26,15 +26,15 @@
     "prepare": "husky"
   },
   "resolutions": {
-    "react": "19.0.0",
+    "react": "19.1.0",
     "react-dom": "19.0.0",
     "react-refresh": "^0.14.0",
-    "react-native-svg": "15.11.2",
+    "react-native-svg": "15.12.1",
     "react-native-web": "~0.19.12"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.6",
-    "@tamagui/cli": "^1.138.0",
+    "@tamagui/cli": "^1.138.2",
     "check-dependency-version-consistency": "^4.1.0",
     "eslint": "^9.3.0",
     "husky": "^9.1.6",

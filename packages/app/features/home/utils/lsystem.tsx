@@ -3,6 +3,7 @@ export function generateLSystemString(
   rules: Record<string, string>,
   iterations: number
 ): string {
+  'worklet'
   let current = axiom
   for (let i = 0; i < iterations; i++) {
     let next = ''
