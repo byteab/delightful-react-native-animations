@@ -145,7 +145,7 @@ const AnimatedTree = () => {
   }, [])
 
   const treePaths = useDerivedValue(() => {
-    const wind = (clock.value / 1000) * 1.3
+    const wind = ((clock.value / 1000) % 200) * 1.3
     return generateTreePaths(wind, tree)
   })
 
