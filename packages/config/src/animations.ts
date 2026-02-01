@@ -21,7 +21,7 @@ export const animations = createAnimations({
   },
   responsive: {
     damping: 15,
-    stiffness: 200,
+    stiffness: 300,
     mass: 1,
   },
   slow: {
