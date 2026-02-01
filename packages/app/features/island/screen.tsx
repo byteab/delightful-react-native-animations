@@ -21,24 +21,24 @@ type STATUS = 'idle' | 'ring' | 'silent' | 'timer'
 const styles = {
   islandStyle: {
     idle: {
-      w: 150,
+      w: 130,
       h: 39,
       scale: 1,
     },
     ring: {
-      w: 190,
+      w: 170,
       h: 39,
       scale: 1,
     },
     silent: {
-      w: 230,
+      w: 210,
       h: 39,
       scale: 1,
     },
     timer: {
-      w: 190,
+      w: 170,
       h: 39,
-      scale: 1.8,
+      scale: 2,
     },
   },
 } as const satisfies Record<string, Record<STATUS, ViewProps>>
@@ -130,14 +130,14 @@ export const DynamicIslandScreen = () => {
                     transformOrigin="left"
                     animateOnly={['opacity', 'width', 'transform']}
                     enterStyle={{ o: 0.5, scale: 0.8, w: 25 }}
-                    exitStyle={{ o: 0, scale: 0.9}}
+                    exitStyle={{ o: 0, scale: 0.9 }}
                     w={50}
                   />
                 )}
               </AnimatePresence>
               <View>
                 <AnimatePresence>
-                  {status !== 'timer' && (
+                  {(status === 'ring' || status === 'silent') && (
                     <View
                       animation={[
                         'quick',
