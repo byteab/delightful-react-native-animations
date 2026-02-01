@@ -22,22 +22,22 @@ const styles = {
   islandStyle: {
     idle: {
       w: 150,
-      h: 40,
+      h: 39,
       scale: 1,
     },
     ring: {
       w: 190,
-      h: 40,
+      h: 39,
       scale: 1,
     },
     silent: {
       w: 230,
-      h: 40,
+      h: 39,
       scale: 1,
     },
     timer: {
       w: 190,
-      h: 40,
+      h: 39,
       scale: 1.8,
     },
   },
@@ -130,7 +130,7 @@ export const DynamicIslandScreen = () => {
                     transformOrigin="left"
                     animateOnly={['opacity', 'width', 'transform']}
                     enterStyle={{ o: 0.5, scale: 0.8, w: 25 }}
-                    exitStyle={{ o: 0, scale: 0.9 }}
+                    exitStyle={{ o: 0, scale: 0.9}}
                     w={50}
                   />
                 )}
@@ -192,8 +192,8 @@ export const DynamicIslandScreen = () => {
                   key="ring"
                   animation={'quick'}
                   animateOnly={['opacity', 'transform']}
-                  enterStyle={{ o: 0 }}
-                  exitStyle={{ o: 0 }}
+                  enterStyle={{ o: 0, scale: 0.7 }}
+                  exitStyle={{ o: 0, scale: 0.8 }}
                   transformOrigin="right"
                   p={4}
                 >
@@ -206,8 +206,8 @@ export const DynamicIslandScreen = () => {
                   key="silent"
                   animation={'quick'}
                   animateOnly={['opacity', 'transform']}
-                  enterStyle={{ o: 0 }}
-                  exitStyle={{ o: 0 }}
+                  enterStyle={{ o: 0, scale: 0.4 }}
+                  exitStyle={{ o: 0, scale: 0.8 }}
                   transformOrigin="left"
                   p={4}
                 >
