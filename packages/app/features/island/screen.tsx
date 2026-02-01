@@ -1,24 +1,12 @@
-import {
-  View,
-  Text,
-  Button,
-  XStack,
-  Theme,
-  styled,
-  AnimatePresence,
-  type ViewProps,
-  useIsPresent,
-} from 'tamagui'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { View, Text, Button, XStack, Theme, styled, AnimatePresence, type ViewProps } from 'tamagui'
+import { useEffect, useState } from 'react'
 import { Bell } from './Bell'
 import Reanimated, {
-  Easing,
-  useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
-  withRepeat,
   withSequence,
+  withSpring,
   withTiming,
 } from 'react-native-reanimated'
 import { BlurViewProps, BlurView as ExpoBlurView } from 'expo-blur'
@@ -26,19 +14,7 @@ import { BlurViewProps, BlurView as ExpoBlurView } from 'expo-blur'
 const BlurView = Reanimated.createAnimatedComponent(styled(ExpoBlurView, {}))
 const AnimatedView = Reanimated.createAnimatedComponent(View)
 
-import { Keyframe } from 'react-native-reanimated'
-
-const bellShaking = new Keyframe({
-  0: {
-    transform: [{ rotate: '0deg' }],
-  },
-  50: {
-    transform: [{ rotate: '20deg' }],
-  },
-  100: {
-    transform: [{ rotate: '0deg' }],
-  },
-}).duration(1000)
+import { usePrevious } from 'app/hooks/usePreviouse'
 
 type STATUS = 'idle' | 'ring' | 'silent' | 'timer'
 
@@ -69,6 +45,7 @@ const styles = {
 
 export const DynamicIslandScreen = () => {
   const [status, setStatus] = useState<STATUS>('idle')
+  const previousStatus = usePrevious(status)
   const ringBlurViewIntensity = useSharedValue(20)
 
   const bellShakingRotation = useSharedValue<number>(0)
@@ -79,39 +56,17 @@ export const DynamicIslandScreen = () => {
   }))
 
   useEffect(() => {
-    if (status === 'silent') {
-      const ANGLE = 20
-      const TIME = 100
+    const ANGLE = 20
+    if (status !== 'timer') {
+      const multiplier = previousStatus === 'idle' || previousStatus === 'ring' ? -1 : 1
       bellShakingRotation.value = withSequence(
-        withTiming(-ANGLE, { duration: TIME / 2 }),
-        withRepeat(
-          withTiming(ANGLE, {
-            duration: TIME,
-          }),
-          7,
-          true
-        ),
-        withTiming(0, { duration: TIME / 2 })
+        withTiming(multiplier * ANGLE, {
+          duration: 200,
+        }),
+        withSpring(0, { stiffness: 500, damping: 10, mass: 1 })
       )
-    } else {
-      cancelAnimationFrame(bellShakingRotation.value)
-      bellShakingRotation.value = 0
     }
-  }, [])
-
-  // useEffect(() => {
-  //   if (state === 2) {
-  //     ringBlurViewIntensity.value = withDelay(400, withTiming(0, { duration: 1000 }))
-  //   } else {
-  //     ringBlurViewIntensity.value = withTiming(10, { duration: 1000 })
-  //   }
-  // }, [state])
-
-  // const animatedStyleRingBlur = useAnimatedStyle(() => {
-  //   return {
-  //     intensity: ringBlurViewIntensity.value,
-  //   }
-  // })
+  }, [status])
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
