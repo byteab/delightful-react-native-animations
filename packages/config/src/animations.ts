@@ -1,4 +1,4 @@
-import { createAnimations } from '@tamagui/animations-react-native'
+import { createAnimations } from '@tamagui/animations-moti'
 
 export const animations = createAnimations({
   '100ms': {
@@ -17,6 +17,11 @@ export const animations = createAnimations({
   medium: {
     damping: 15,
     stiffness: 120,
+    mass: 1,
+  },
+  responsive: {
+    damping: 15,
+    stiffness: 200,
     mass: 1,
   },
   slow: {
