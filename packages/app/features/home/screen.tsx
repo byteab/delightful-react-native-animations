@@ -14,6 +14,14 @@ export const HomeScreen = () => {
             router.push('/tree')
           }}
         />
+        <ListItem
+          hoverTheme
+          title="Dynamic Island"
+          subTitle="A dynamic island animation"
+          onPress={() => {
+            router.push('/island')
+          }}
+        />
       </YGroup.Item>
     </YGroup>
   )
